@@ -10,9 +10,13 @@ class TaskManager extends Controller
     function listTask()
     {
         $tasks = Tasks::where("user_id", auth()->user()->id)
-        ->where("status", NULL)->paginate(3);
+                  ->whereIn("status", ['pending', 'completed'])
+                  ->orderBy('status')  // Optional: order by status
+                  ->paginate(8);  // Single pagination
+
         return view("welcome", compact('tasks'));
     }
+
 
     function addtask()
     {
@@ -31,6 +35,7 @@ class TaskManager extends Controller
         $task->description = $request->description;
         $task->deadline = $request->deadline;
         $task->user_id = auth()->user()->id;
+        $task->status = $request->status ?? 'pending';
 
         if($task->save()){
             return redirect(route("home"))->with("success", "Task added successfully");
