@@ -31,9 +31,10 @@
 @section("content")
 <main class="form-signin w-100 m-auto">
     <form method="POST" action="{{route("login.post")}}">
+        <h2><b>Welcome to ToDo App</b></h2>
         @csrf
       <img class="mb-4" src="{{asset("assets/img/image.png")}}" alt="" width="72" height="57">
-      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+      <h3 class="h4 mb-3 fw-normal">Please sign in</h3>
 
       <div class="form-floating">
         <input name="email" type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
